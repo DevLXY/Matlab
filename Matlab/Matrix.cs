@@ -425,22 +425,42 @@ namespace Matlab
 
         }
         //重写Object.Equals()和Object.GetHashCode().《入门经典》11.2.1最后一部分
-        public int val;
+
         public override bool Equals(object a)
         {
             if(a is Matrix)
             {
-                return val == ((Matrix)a).val;
+                if (this.RowCount== ((Matrix)a).RowCount&& this.ColumnCount == ((Matrix)a).ColumnCount)
+                {
+                    for (int i = 0; i < this.RowCount; i++)
+                    {
+                        for (int j = 0; j < this.ColumnCount; j++)
+                        {
+                            if (this[i, j] != ((Matrix)a)[i, j])
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             else
             {
-                throw new ArgumentException("Cannot compare Matrix object with object of type" + a.GetType().ToString());
+                return false;
             }
         }
         public override int GetHashCode()
         {
-            return val;
+            return this.RowCount*this.ColumnCount*this.RowCount;
         }
         #endregion
+        int ? a = 5;
     }
+
 }
