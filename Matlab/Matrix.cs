@@ -269,7 +269,7 @@ namespace Matlab
 
         }
 
-        public static Matrix MatrixDotMult(Matrix a, Matrix b)
+        public static Matrix operator * (Matrix a, Matrix b)
         {
             if (a.ColumnCount == b.ColumnCount && a.RowCount == b.RowCount)
             {
@@ -289,16 +289,16 @@ namespace Matlab
             }
         }
 
-        public static Matrix MatrixDotMult(double a, Matrix b)
+        public static Matrix operator * (double a, Matrix b)
         {
             Matrix aa = new Matrix(b.RowCount, b.ColumnCount, a);
 
-            return MatrixDotMult(aa, b);
+            return (aa*b);
         }
 
-        public static Matrix MatrixDotMult(Matrix a, double b)
+        public static Matrix operator *(Matrix a, double b)
         {
-            return MatrixDotMult(b, a);
+            return (b* a);
         }
 
         #endregion
