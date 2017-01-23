@@ -460,7 +460,6 @@ namespace Matlab
             return this.RowCount*this.ColumnCount*this.RowCount;
         }
         #endregion
-        int ? a = 5;
     }
 
 }
