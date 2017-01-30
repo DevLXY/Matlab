@@ -149,6 +149,26 @@ namespace Matlab
         {
             return InnerVar;
         }
+        /// <summary>
+        /// 矩阵转换成行向量（一维数组）
+        /// </summary>
+        /// <returns></returns>
+        public double[] ToVector()
+        {
+            if (InnerVar.GetLength(0)!=1)
+            {
+                throw new Exception("此矩阵无法直接转换成行向量");
+            }
+            else
+            {
+                double[] d = new double[InnerVar.GetLength(1)];
+                for (int i = 0; i < InnerVar.GetLength(1); i++)
+                {
+                    d[i] = InnerVar[0, i];
+                }
+                return d;
+            }
+        }
 
         /// <summary>
         /// Matrix to string
@@ -242,7 +262,7 @@ namespace Matlab
 
         #endregion
 
-        #region 矩阵乘法 （还没重写呢）
+        #region 矩阵乘法 
         public static Matrix MatrixMult(Matrix a, Matrix b)             //输入两个实例化的Matrix类a，b，相乘
         {
             if (a.ColumnCount == b.RowCount)
